@@ -11,9 +11,12 @@ public class DecodedToken {
 	private static final String namespace = "https://perms.moda.com/";
 	private String authToken; 
 	private String scopes;
-	private String groups;
-	private String roles;
-    private String permissions;
+//	private String groups;
+//	private String roles;
+//  private String permissions;
+	private String[] groups;
+	private String[] roles;
+    private String[] permissions;
     
     public DecodedToken() {
     	this.authToken = null;
@@ -34,42 +37,73 @@ public class DecodedToken {
     }
     
 	public String getToken() {
+		return this.authToken;
+	}
+	
+	public String getScopes() {
+		return this.scopes;
+	}
+	
+	public String[] getGroups() {
+		return this.groups;
+	}
+	
+	public String[] getRoles() {
+		return this.roles;
+	}
+
+	public String[] getPermissions() {
+		return this.permissions;
+	}
+	
+	public void printToken() {
 		System.out.println("-------------ACCESS TOKEN-------------");
 		System.out.println(this.authToken);
 		System.out.println("-------------ACCESS TOKEN-------------");
-		return this.authToken;
+	}
+	
+	public void printScopes() {
+		System.out.println("Scopes: " + this.scopes);
+	}
+	
+	public void printGroups() {
+	    StringBuilder sb = new StringBuilder();
+	    for (String str : this.groups) {
+	    	sb.append(str).append(" ");
+	    }
+	    System.out.println("Groups: " + sb.toString());
+	}
+	
+	public void printRoles() {
+		StringBuilder sb = new StringBuilder();
+	    for (String str : this.roles) {
+	    	sb.append(str).append(" ");
+	    }
+	    System.out.println("Roles: " + sb.toString());
+	}
+	
+	public void printPermissions() {
+		StringBuilder sb = new StringBuilder();
+	    for (String str : this.permissions) {
+	    	sb.append(str).append(" ");
+	    }
+	    System.out.println("Permissions: " + sb.toString());
 	}
 	
 	public void printUserInfo() {
 		try {
-		    // Print out Scopes, Groups, Roles, and Permissions  
-		    System.out.println("Scopes: " + this.scopes);
-		    System.out.println("Groups: " + this.groups);
-		    System.out.println("Roles: " + this.roles);
-		    System.out.println("Permissions: " + this.permissions);
+		    // Print out Scopes, Groups, Roles, and Permissions  			
+//		    System.out.println("Scopes: " + this.scopes);
+//		    System.out.println("Groups: " + this.groups);
+//		    System.out.println("Roles: " + this.roles);
+//		    System.out.println("Permissions: " + this.permissions);
+		    printScopes();
+		    printGroups();
+		    printRoles();
+		    printPermissions();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-	}
-	
-	public String getScopes() {
-		System.out.println("Scopes: " + this.scopes);
-		return this.scopes;
-	}
-	
-	public String getGroups() {
-		System.out.println("Groups: " + this.groups);
-		return this.groups;
-	}
-	
-	public String getRoles() {
-		System.out.println("Roles: " + this.roles);
-		return this.roles;
-	}
-
-	public String getPermissions() {
-		System.out.println("Permissions: " + this.permissions);
-		return this.permissions;
 	}
 	
 	private void helper(HttpServletRequest request) {
@@ -90,9 +124,9 @@ public class DecodedToken {
     	try {
     	    DecodedJWT jwt = JWT.decode(token);
     	    this.scopes = jwt.getClaim("scope").asString();
-    	    this.groups = arrayToString(jwt.getClaim(namespace + "groups").asArray(String.class));
-    	    this.roles = arrayToString(jwt.getClaim(namespace + "roles").asArray(String.class));
-    	    this.permissions = arrayToString(jwt.getClaim(namespace + "permissions").asArray(String.class));	    
+    	    this.groups = jwt.getClaim(namespace + "groups").asArray(String.class);
+    	    this.roles = jwt.getClaim(namespace + "roles").asArray(String.class);
+    	    this.permissions = jwt.getClaim(namespace + "permissions").asArray(String.class);	    
     	} catch (JWTDecodeException exception){
     		System.out.println("Invalid token.");
     	}

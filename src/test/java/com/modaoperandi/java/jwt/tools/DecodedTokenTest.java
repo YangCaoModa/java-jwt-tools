@@ -29,23 +29,31 @@ public class DecodedTokenTest {
 	
 	@Test
 	public void getGroups() throws Exception {
-		assertEquals("Admins Buyers", decodedToken1.getGroups());
-		assertEquals(null, decodedToken2.getGroups());
-		assertEquals(null, decodedToken3.getGroups());
+		assertEquals("Admins Buyers", arrayToString(decodedToken1.getGroups()));
+		assertNull(decodedToken2.getGroups());
+		assertNull(decodedToken3.getGroups());
 	}
 	
 	@Test
 	public void getRoles() throws Exception {
-		assertEquals("Admin Buyer", decodedToken1.getRoles());
-		assertEquals(null, decodedToken2.getRoles());
-		assertEquals(null, decodedToken3.getRoles());
+		assertEquals("Admin Buyer", arrayToString(decodedToken1.getRoles()));
+		assertNull(decodedToken2.getRoles());
+		assertNull(decodedToken3.getRoles());
 	}
 	
 	@Test
 	public void getPermissions() throws Exception {
-		assertEquals("read:packets create:packets update:packets delete:packets", decodedToken1.getPermissions());
-		assertEquals(null, decodedToken2.getPermissions());
-		assertEquals(null, decodedToken3.getPermissions());
+		assertEquals("read:packets create:packets update:packets delete:packets", arrayToString(decodedToken1.getPermissions()));
+		assertNull(decodedToken2.getPermissions());
+		assertNull(decodedToken3.getPermissions());
+	}
+	
+	private String arrayToString(String[] array) {
+	    StringBuilder sb = new StringBuilder();
+	    for (String str : array) {
+	    	sb.append(str).append(" ");
+	    }
+	    return sb.toString().trim();
 	}
 }
 
