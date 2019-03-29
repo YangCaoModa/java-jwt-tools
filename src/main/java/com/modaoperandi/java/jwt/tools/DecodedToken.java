@@ -34,6 +34,9 @@ public class DecodedToken {
     }
     
 	public String getToken() {
+		System.out.println("-------------ACCESS TOKEN-------------");
+		System.out.println(this.authToken);
+		System.out.println("-------------ACCESS TOKEN-------------");
 		return this.authToken;
 	}
 	
@@ -72,9 +75,6 @@ public class DecodedToken {
 	private void helper(HttpServletRequest request) {
 		try {
 			String header = request.getHeader("Authorization");
-			System.out.println("-------------ACCESS TOKEN-------------");
-			System.out.println(header);
-			System.out.println("-------------ACCESS TOKEN-------------");
 			this.authToken = header != null ? header.substring(7) : null; 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
