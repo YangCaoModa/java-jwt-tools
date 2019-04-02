@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 public class DecodedTokenTest {
 	
-	private String token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL3Blcm1zLm1vZGEuY29tL2dyb3VwcyI6WyJBZG1pbnMiLCJCdXllcnMiXSwiaHR0cHM6Ly9wZXJtcy5tb2RhLmNvbS9yb2xlcyI6WyJBZG1pbiIsIkJ1eWVyIl0sImh0dHBzOi8vcGVybXMubW9kYS5jb20vcGVybWlzc2lvbnMiOlsicmVhZDpwYWNrZXRzIiwiY3JlYXRlOnBhY2tldHMiLCJ1cGRhdGU6cGFja2V0cyIsImRlbGV0ZTpwYWNrZXRzIl0sImlzcyI6Imh0dHBzOi8vbW9kYW9wZXJhbmRpLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1YzdlZjNlNDNmODUxYzE4ZTNkZWQ1MWQiLCJhdWQiOiJodHRwczovL3JvdWdlLm1vZGFhcHBzLmNvbS9hcGkiLCJpYXQiOjE1NTM4MDA3NDcsImV4cCI6MTU1MzgwNzk0NywiYXpwIjoiWFdCSndmVVdPdjNoRlU0YjdoeXpqbFYzclBuNGhzWmEiLCJzY29wZSI6InJlYWQ6cGFja2V0cyBjcmVhdGU6cGFja2V0cyB1cGRhdGU6cGFja2V0cyBkZWxldGU6cGFja2V0cyJ9.ni3ea7ZXKbSitb1hO-sYEjhDh48WghB-pRM1uj764kA"; 
+	private String token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL3Blcm1zLm1vZGEuY29tL2dyb3VwcyI6WyJBZG1pbnMiXSwiaHR0cHM6Ly9wZXJtcy5tb2RhLmNvbS9yb2xlcyI6WyJBZG1pbiJdLCJodHRwczovL3Blcm1zLm1vZGEuY29tL3Blcm1pc3Npb25zIjpbInJlYWQ6cGFja2V0cyIsImNyZWF0ZTpwYWNrZXRzIiwidXBkYXRlOnBhY2tldHMiLCJkZWxldGU6cGFja2V0cyJdLCJpYXQiOjE1NTM4MDA3NDcsImV4cCI6MTU1MzgwNzk0Nywic2NvcGUiOiJyZWFkOnBhY2tldHMgY3JlYXRlOnBhY2tldHMgdXBkYXRlOnBhY2tldHMgZGVsZXRlOnBhY2tldHMifQ.2zRpv1RHlYYfOY51hDmUlHyox6noxay-YjLYGDtZp_k"; 
 	private String token2 = "";
 	private String token3 = null;
 	
@@ -29,14 +29,14 @@ public class DecodedTokenTest {
 	
 	@Test
 	public void getGroups() throws Exception {
-		assertEquals("Admins Buyers", arrayToString(decodedToken1.getGroups()));
+		assertEquals("Admins", arrayToString(decodedToken1.getGroups()));
 		assertNull(decodedToken2.getGroups());
 		assertNull(decodedToken3.getGroups());
 	}
 	
 	@Test
 	public void getRoles() throws Exception {
-		assertEquals("Admin Buyer", arrayToString(decodedToken1.getRoles()));
+		assertEquals("Admin", arrayToString(decodedToken1.getRoles()));
 		assertNull(decodedToken2.getRoles());
 		assertNull(decodedToken3.getRoles());
 	}
@@ -49,11 +49,11 @@ public class DecodedTokenTest {
 	}
 	
 	private String arrayToString(String[] array) {
-	    StringBuilder sb = new StringBuilder();
-	    for (String str : array) {
-	    	sb.append(str).append(" ");
-	    }
-	    return sb.toString().trim();
+		StringBuilder sb = new StringBuilder();
+		for (String str : array) {
+			sb.append(str).append(" ");
+		}
+		return sb.toString().trim();
 	}
 }
 
